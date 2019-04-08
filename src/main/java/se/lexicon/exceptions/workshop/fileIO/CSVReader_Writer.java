@@ -2,7 +2,6 @@ package se.lexicon.exceptions.workshop.fileIO;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -20,6 +19,7 @@ public class CSVReader_Writer {
 	public static List<String> getMaleFirstNames(){
 
 		BufferedReader reader = null;
+		
 		List<String> names = null;
 
 		try {
@@ -41,9 +41,6 @@ public class CSVReader_Writer {
 
 		return names;
 	}
-
-
-
     /**
      * This method getFemaleFirstNames should make use of a try-catch with resources
      * @return
@@ -65,8 +62,6 @@ public class CSVReader_Writer {
 		return names;
 	}
 	
-
-
     /**
      * This method fetches strings from a file and put them into a list
      * This method might throw IOException which due to the throws clause need to
@@ -96,9 +91,7 @@ public class CSVReader_Writer {
         }
         return names;
     }
-
-    
-
+   
     public static void saveLastNames(List <String> lastNames){
 
             BufferedWriter writer;
@@ -128,10 +121,7 @@ public class CSVReader_Writer {
 			e.printStackTrace();
 		}
             
-
     }
-
-
 
     public static void saveMaleNames(List <String> maleNames){
         BufferedWriter writer;
@@ -142,13 +132,9 @@ public class CSVReader_Writer {
             }
             writer.flush();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-            
-
-
+           
     }
-
 
 }
