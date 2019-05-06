@@ -2,6 +2,7 @@ package se.lexicon.exceptions.workshop.fileIO;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -10,6 +11,9 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class CSVReader_Writer {
+	
+	
+//========================================= 1 ==============================================
 	 /**
      * This method getMaleFirstNames should use a try-catch-finally without resources
      * Should catch FileNotFoundException and IOException
@@ -25,22 +29,26 @@ public class CSVReader_Writer {
 		try {
 			reader = Files.newBufferedReader(Paths.get("firstname_males.txt"));
 			names = reader.lines().flatMap(line -> Stream.of(line.split(","))).collect(Collectors.toList());
-		} catch (IOException e) {
+		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 
-		} finally {
-			System.out.println(names);
-			try {
-				reader.close();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+			} finally {
+				try {
+					reader.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 			}
 		}
 
 		return names;
 	}
+	
+//======================================= 2 ==============================================
+
     /**
      * This method getFemaleFirstNames should make use of a try-catch with resources
      * @return
@@ -54,13 +62,15 @@ public class CSVReader_Writer {
 			reader = Files.newBufferedReader(Paths.get("firstname_female.txt"));
 			names = reader.lines().flatMap(line -> Stream.of(line.split(","))).collect(Collectors.toList());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		System.out.println(names);
 
 		return names;
 	}
+	
+//========================================= 3 ==============================================
 	
     /**
      * This method fetches strings from a file and put them into a list
@@ -80,17 +90,19 @@ public class CSVReader_Writer {
                 .flatMap(line -> Stream.of(line.split(",")))
                 .collect(Collectors.toList());
 
-
         }catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally{
             
-			if(reader!=null) reader.close();
+			if(reader!=null) 
+				reader.close();
             
         }
         return names;
     }
+    
+//======================================= 4 ===========================================
    
     public static void saveLastNames(List <String> lastNames){
 
@@ -108,6 +120,8 @@ public class CSVReader_Writer {
             
       }
 
+//======================================= 5 ===========================================
+
     public static void saveFemaleNames(List <String> femaleNames){
         BufferedWriter writer;
 		try {
@@ -122,13 +136,15 @@ public class CSVReader_Writer {
 		}
             
     }
+ 
+//======================================= 6 ===========================================
 
     public static void saveMaleNames(List <String> maleNames){
         BufferedWriter writer;
 		try {
-			writer = Files.newBufferedWriter(Paths.get("firstname_males.txt"));
+			writer = Files.newBufferedWriter(Paths.get("lastnames.txt"));
 			for(String toWrite : maleNames){
-                writer.append(toWrite+",");
+                writer.append(toWrite +",");
             }
             writer.flush();
 		} catch (IOException e) {
